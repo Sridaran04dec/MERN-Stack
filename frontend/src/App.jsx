@@ -1,12 +1,5 @@
 
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-
-import { Toaster } from "react-hot-toast";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -15,31 +8,41 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          duration: 3000,
-          style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
-          },
-        }}
+    <Routes>
+      {/* Default page */}
+      <Route
+        path="/"
+        element={<Navigate to="/login" replace />}
       />
 
-      <Routes>
-        <Route path="/" element={<Navigate to="/register" replace />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+      {/* Register page */}
+      <Route
+        path="/register"
+        element={<Register />}
+      />
 
-        <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Route>
+      {/* Login page */}
+      <Route
+        path="/login"
+        element={<Login />}
+      />
 
-        <Route path="*" element={<Navigate to="/register" replace />} />
-      </Routes>
-    </BrowserRouter>
+      {/* Protected dashboard */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Invalid URL */}
+      <Route
+        path="*"
+        element={<Navigate to="/login" replace />}
+      />
+    </Routes>
   );
 }
 
