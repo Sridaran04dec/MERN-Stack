@@ -5,7 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { showSuccess, showError } from "../utils/toast";
 import "./Auth.css";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, ShieldCheck } from "lucide-react";
 import baseUrl from "../api/axios";
 
 
@@ -72,7 +72,9 @@ function Login() {
     <div className="auth-page">
       <div className="auth-card">
         <div className="auth-brand">
-          <div className="auth-logo">S4</div>
+          <div className="auth-logo">
+            <ShieldCheck size={26} strokeWidth={2} />
+          </div>
           <span>SRI04DEC</span>
         </div>
 
