@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -75,7 +74,6 @@ function Login() {
           <div className="auth-logo">
             <ShieldCheck size={26} strokeWidth={2} />
           </div>
-          <span>SRI04DEC</span>
         </div>
 
         <div className="auth-heading">
