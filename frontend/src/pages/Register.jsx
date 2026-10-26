@@ -7,8 +7,9 @@ import axios from "axios";
 import { showSuccess, showError } from "../utils/toast";
 import "./Auth.css";
 import { Eye, EyeOff } from "lucide-react";
+import baseUrl from "../api/axios";
 
-const API_URL = "http://localhost:5000/api/auth";
+
 
 const registerSchema = Yup.object({
   name: Yup.string()
@@ -39,7 +40,7 @@ function Register() {
     setLoading(true);
 
     try {
-      const response = await axios.post(`${API_URL}/register`, {
+      const response = await axios.post(`${baseUrl}/register`, {
         name: values.name.trim(),
         email: values.email.trim(),
         password: values.password,

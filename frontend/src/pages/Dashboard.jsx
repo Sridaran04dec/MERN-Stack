@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Dashboard.css";
+import baseUrl from "../api/axios";
+
 
 function Dashboard() {
   const [users, setUsers] = useState([]);
@@ -14,8 +16,8 @@ function Dashboard() {
       setLoading(true);
       setError("");
 
-      const response = await axios.get(
-        "http://localhost:5000/api/auth/users"
+      const response = await baseUrl.get(
+        "/auth/users"
       );
 
       setUsers(response.data.users || []);
