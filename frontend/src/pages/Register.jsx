@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import { showSuccess, showError } from "../utils/toast";
 import "./Auth.css";
 import { Eye, EyeOff } from "lucide-react";
@@ -35,12 +34,13 @@ function Register() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleRegister = async (values, { resetForm }) => {
     setLoading(true);
 
     try {
-      const response = await axios.post(`${baseUrl}/register`, {
+      const response = await baseUrl.post("/auth/register", {
         name: values.name.trim(),
         email: values.email.trim(),
         password: values.password,
@@ -148,21 +148,38 @@ function Register() {
                   )}
                 </button>
               </div>
-              
 
 
               <div className="form-group">
-                <label htmlFor="confirmPassword">
-                  Confirm Password
-                </label>
+                <label htmlFor="confirmPassword">Confirm Password</label>
 
-                <Field
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type="password"
-                  placeholder="Re-enter your password"
-                  autoComplete="new-password"
-                />
+                <div className="password-wrapper">
+                  <Field
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type={showConfirmPassword ? "text" : "password"}
+                    placeholder="Re-enter your password"
+                    autoComplete="new-password"
+                  />
+
+                  <button
+                    type="button"
+                    className="password-toggle"
+                    onClick={() => setShowConfirmPassword((prev) => !prev)}
+                    aria-label={
+                      showConfirmPassword
+                        ? "Hide confirm password"
+                        : "Show confirm password"
+                    }
+                    aria-pressed={showConfirmPassword}
+                  >
+                    {showConfirmPassword ? (
+                      <EyeOff size={20} strokeWidth={1.8} />
+                    ) : (
+                      <Eye size={20} strokeWidth={1.8} />
+                    )}
+                  </button>
+                </div>
 
                 <ErrorMessage
                   name="confirmPassword"

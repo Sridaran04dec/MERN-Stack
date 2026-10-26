@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import { showSuccess, showError } from "../utils/toast";
 import "./Auth.css";
 import { Eye, EyeOff } from "lucide-react";
@@ -29,7 +28,7 @@ function Login() {
     setLoading(true);
 
     try {
-      const response = await axios.post(`${baseUrl}/login`, {
+      const response = await baseUrl.post(`auth/login`, {
         email: values.email.trim(),
         password: values.password,
       });
