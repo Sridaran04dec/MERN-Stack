@@ -5,32 +5,24 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const authRoutes = require("./routes/authRoutes");
 
-// Create Express application
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 
-// Test API route
-app.get("/", (req, res) => {
-  res.status(200).send("MERN Auth API is running!");
-});
-
-// Server port
 const PORT = process.env.PORT || 5000;
 
-// Connect MongoDB and start server
+// Connect MongoDB and server
 async function startServer() {
   try {
-    // Check MongoDB connection string
+    // Check MongoDB connection
     if (!process.env.MONGO_URI) {
       throw new Error("MONGO_URI is missing in .env file");
     }
 
-    // Connect to MongoDB Atlas
+    // Connect to MongoDB
     await mongoose.connect(process.env.MONGO_URI);
 
     console.log("MongoDB connected successfully!");
@@ -45,5 +37,4 @@ async function startServer() {
   }
 }
 
-// Start application
 startServer();
