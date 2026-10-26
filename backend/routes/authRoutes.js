@@ -6,10 +6,7 @@ const User = require("../models/User.js");
 
 const router = express.Router();
 
-// ===============================
-// REGISTER API
-// POST /api/auth/register
-// ===============================
+// ==============Register function POST =================
 router.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -83,10 +80,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// ===============================
-// LOGIN API
-// POST /api/auth/login
-// ===============================
+// ==============Login function POST =================
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -149,7 +143,7 @@ router.post("/login", async (req, res) => {
 });
 
 
-// Get all registered users
+// ==============Get all registered users =================
 router.get("/users", async (req, res) => {
   try {
     const users = await User.find()
